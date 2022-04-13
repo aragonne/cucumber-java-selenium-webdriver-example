@@ -28,7 +28,7 @@ public class Setup {
                 break;
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-		firefox.Options.addArguments("-headless", "-safe-mode");
+		firefoxOptions.addArguments("-headless", "-safe-mode");
 		driver = new FirefoxDriver(firefoxOptions);
 		break;
             default:
