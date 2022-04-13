@@ -26,9 +26,19 @@ public class Setup {
                 driver = new ChromeDriver(chromeOptions);
                 break;
             case "firefox":
-                driver = new FirefoxDriver();
-                driver.manage().window().maximize();
-                break;
+                FirefoxOptions options = new FirefoxOptions();
+				if (headless) {
+					options.addArguments("-headless", "-safe-mode");
+				}
+				capabilities.setCapability(FirefoxOptions.FIREFOX_OPTIONS, options);
+				try {
+					driver = new FirefoxDriver(capabilities);
+				}
+				catch(Exception e) {
+					System.out.println(e.getMessage());
+					System.exit(0);
+				}
+				return driver;
             default:
                 throw new IllegalArgumentException("Browser \"" + browser + "\" isn't supported.");
         }
